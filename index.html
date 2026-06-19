@@ -23,22 +23,38 @@
     font-family: 'Arial Narrow', Arial, sans-serif;
     font-stretch: condensed;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   }
 
-  img, video { display: block; max-width: 100%; }
+  img, video { display: block; max-width: 100%; height: auto; }
+
+  /* ---------- Structural Desktop Containers ---------- */
+  .layout-wrapper {
+    max-width: 1080px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .text-bounds {
+    max-width: 620px;
+    margin: 0 auto;
+    width: 100%;
+  }
 
   /* ---------- Hero ---------- */
   .hero {
     width: 100%;
     background: var(--bg);
   }
+  .hero-img-wrap {
+    width: 100%;
+  }
   .hero img {
     width: 100%;
-    height: auto;
     display: block;
   }
 
@@ -47,19 +63,18 @@
     padding: 2.2rem 6vw 3.5rem;
   }
 
+  /* Fixed Typography: Increased baseline desktop size constraints */
   .tagline {
-    max-width: 42ch;
-    margin: 0 auto;
-    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    font-size: 1.1rem;
     font-weight: 400;
     letter-spacing: 0.01em;
-    line-height: 1.7;
+    line-height: 1.65;
     color: var(--grey);
     opacity: 0;
     animation: rise 1s ease forwards 0.2s;
   }
 
-  /* Fixed 1: Tightened the gap between body copy and CTA by 50% */
+  /* Fixed Spacing 1: Tightened link gap by 50% */
   .links-row {
     margin-top: 0.7rem;
     display: flex;
@@ -71,8 +86,8 @@
   }
 
   .itch-link {
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
     color: var(--orange);
     text-decoration: none;
     border-bottom: 1px solid var(--orange);
@@ -87,24 +102,22 @@
   }
 
   /* ---------- Quote ---------- */
-  /* Fixed 2: Added extra top breathing room; stripped bottom padding */
+  /* Fixed Spacing 2: Added top breathing space, zeroed out base bottom padding */
   .quote-section {
     text-align: center;
-    padding: 5.5rem 6vw 0;
-    max-width: 640px;
-    margin: 0 auto;
+    padding: 6rem 6vw 0;
   }
   .quote-section blockquote {
-    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-size: 1.25rem;
     font-style: italic;
     line-height: 1.6;
     color: var(--ink);
   }
-  /* Fixed 2: Tightened gap under attribution to frame the upcoming screenshot */
+  /* Fixed Spacing 2: Tightened gap under attribution */
   .quote-section cite {
     display: block;
     margin-top: 0.8rem;
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-style: normal;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -112,11 +125,9 @@
   }
 
   /* ---------- Media section ---------- */
-  /* Fixed 2: Reduced top padding to pull screenshot closer to quote hook */
+  /* Fixed Spacing 2: Reduced top space to group cleanly below the quote hook */
   .media {
     padding: 1.5rem 6vw 5rem;
-    max-width: 1000px;
-    margin: 0 auto;
   }
   .media-frame {
     border: 1px solid var(--line);
@@ -129,17 +140,14 @@
     width: 100%;
     display: block;
   }
-  /* Fixed 3: Pulled caption significantly closer to the edge of the screen asset */
+  /* Fixed Spacing 3: Brought caption immediately underneath screenshot */
   .media-caption {
     margin-top: 0.4rem;
-    font-size: 0.92rem;
+    font-size: 1rem;
     letter-spacing: 0.01em;
     text-transform: none;
     color: var(--grey);
     text-align: center;
-    max-width: 50ch;
-    margin-left: auto;
-    margin-right: auto;
     line-height: 1.6;
   }
 
@@ -151,30 +159,30 @@
   }
 
   /* ---------- Notify section ---------- */
-  /* Fixed 4: Created a deeper, more intentional section break */
+  /* Fixed Spacing 4: Distinct layout breaking container via padding adjustments */
   .notify {
-    min-height: 65vh;
+    min-height: 55vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 10vh 6vw 8vh;
+    padding: 8vh 6vw;
     border-top: 1px solid var(--line);
   }
 
   .notify h2 {
     font-weight: 700;
-    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    font-size: 1.8rem;
     letter-spacing: 0.01em;
     margin-bottom: 0.9rem;
   }
 
   .notify p {
     color: var(--grey);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     max-width: 40ch;
-    line-height: 1.7;
+    line-height: 1.6;
     margin-bottom: 2.3rem;
   }
 
@@ -184,6 +192,7 @@
     max-width: 420px;
     border-bottom: 1px solid var(--ink);
     padding-bottom: 0.5rem;
+    margin: 0 auto;
   }
 
   input[type="email"] {
@@ -192,7 +201,7 @@
     border: none;
     outline: none;
     font-family: 'Arial Narrow', Arial, sans-serif;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: var(--ink);
     padding: 0.4rem 0.2rem;
   }
@@ -202,7 +211,7 @@
     background: var(--orange);
     border: none;
     font-family: 'Arial Narrow', Arial, sans-serif;
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #fff;
@@ -220,15 +229,15 @@
 
   .status {
     margin-top: 1.2rem;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--grey);
     min-height: 1.2em;
   }
 
-  /* Fixed 4: Increased spacing significantly above secondary links to let the footer breathe */
+  /* Fixed Spacing 4: Amplified padding layout gaps separating primary and footer targets */
   .footer-links {
     margin-top: 4.5rem;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--ash);
@@ -247,59 +256,76 @@
   footer {
     text-align: center;
     padding: 2.5rem 6vw 3.5rem;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--ash);
     letter-spacing: 0.04em;
+  }
+
+  /* ---------- Media Query Enhancements for Laptop & Desktop Screens ---------- */
+  @media screen and (min-width: 769px) {
+    .tagline { font-size: 1.35rem; }
+    .itch-link { font-size: 1.1rem; }
+    .quote-section blockquote { font-size: 1.65rem; max-width: 720px; margin: 0 auto; }
+    .quote-section cite { font-size: 0.95rem; margin-top: 1.2rem; }
+    .media-caption { font-size: 1.15rem; margin-top: 0.8rem; }
+    .notify h2 { font-size: 2.2rem; }
+    .notify p { font-size: 1.2rem; }
+    .footer-links { font-size: 0.85rem; margin-top: 6rem; }
   }
 </style>
 </head>
 <body>
 
 <main>
-  <!-- 1. Hero Body Copy Section -->
   <section class="hero">
-    <img src="hero.png" alt="The Lonely Architect — key art">
-    <div class="hero-sub">
+    <div class="layout-wrapper hero-img-wrap">
+      <img src="hero.png" alt="The Lonely Architect — key art">
+    </div>
+    <div class="text-bounds hero-sub">
       <p class="tagline">The Lonely Architect is a 2D atmospheric platformer set inside the subconscious of an isolated, overworked architect. What started as a demo that placed in the Top 25 for the 2024 ‘Safe In Our World’ Game Jam is now the debut title from solo developer Odaro Eguavoen (Ekosodi Games).</p>
       <div class="links-row">
-        <a class="itch-link" href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">Play now on itch.io</a>
+        <a class="itch-link" href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">[ Play now on itch.io ]</a>
       </div>
     </div>
   </section>
 
-  <!-- 2. Testimonial / Review Quote Section -->
   <section class="quote-section">
-    <blockquote>“I adore the abstract artwork and surrealist interpretation of the mind – visually this game really stands out! The puzzles were engaging and is certainly one I’d like to see developed further.”</blockquote>
-    <cite>— SAFE IN OUR WORLD</cite>
+    <div class="text-bounds">
+      <blockquote>“I adore the abstract artwork and surrealist interpretation of the mind – visually this game really stands out! The puzzles were engaging and is certainly one I’d like to see developed further.”</blockquote>
+      <cite>— SAFE IN OUR WORLD</cite>
+    </div>
   </section>
 
-  <!-- 3. Gameplay Image Caption Section -->
   <section class="media">
-    <div class="media-grid">
-      <div>
-        <div class="media-frame">
-          <img src="teaser.gif" alt="Gameplay preview of The Lonely Architect">
+    <div class="layout-wrapper">
+      <div class="media-grid">
+        <div>
+          <div class="media-frame">
+            <img src="teaser.gif" alt="Gameplay preview of The Lonely Architect">
+          </div>
+          <div class="text-bounds">
+            <p class="media-caption">Navigate eerie, minimalist landscapes shaped by isolation.</p>
+          </div>
         </div>
-        <p class="media-caption">Navigate eerie, minimalist landscapes shaped by isolation.</p>
       </div>
     </div>
   </section>
 
-  <!-- 4. Steam CTA Section -->
   <section class="notify">
-    <h2>Be there when the doors open on Steam</h2>
-    <p>Get an email when The Lonely Architect launches on Steam.</p>
+    <div class="text-bounds">
+      <h2>Be there when the doors open on Steam</h2>
+      <p>Get an email when The Lonely Architect launches on Steam.</p>
 
-    <form id="signup-form" action="https://formspree.io/f/mjgdngrd" method="POST">
-      <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
-      <button type="submit">NOTIFY ME</button>
-    </form>
-    
-    <!-- Success microcopy renders cleanly here upon active form interaction -->
-    <div class="status" id="form-status" role="status"></div>
+      <form id="signup-form" action="https://formspree.io/f/mjgdngrd" method="POST">
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+        <button type="submit">NOTIFY ME</button>
+      </form>
+      
+      <div class="status" id="form-status" role="status"></div>
 
-    <div class="footer-links">
-      WISHLIST SOON ON STEAM &bull; ALREADY PLAYABLE ON <a href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">ITCH.IO</a>
+      <div class="footer-links">
+        WISHLIST SOON ON STEAM &bull; ALREADY PLAYABLE ON <a href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">ITCH.IO</a>
+      </div>
     </div>
   </section>
 
@@ -321,7 +347,6 @@
         headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
-        // Updated dynamic success microcopy
         status.textContent = "You’re in. We’ll let you know the moment it’s ready.";
         form.reset();
       } else {
