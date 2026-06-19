@@ -23,18 +23,32 @@
     font-family: 'Arial Narrow', Arial, sans-serif;
     font-stretch: condensed;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   }
 
-  img, video { display: block; max-width: 100%; }
+  main {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  img, video { display: block; max-width: 100%; margin: 0 auto; }
 
   /* ---------- Hero ---------- */
   .hero {
     width: 100%;
     background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .hero img.hero-art {
     width: 100%;
@@ -44,11 +58,14 @@
 
   .hero-sub {
     text-align: center;
-    padding: 2.2rem 6vw 3.5rem;
+    padding: 2.5rem 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .tagline {
-    max-width: 46ch;
+    max-width: 55ch;
     margin: 0 auto;
     font-size: clamp(0.95rem, 1.6vw, 1.15rem);
     font-weight: 400;
@@ -60,7 +77,7 @@
   }
 
   .links-row {
-    margin-top: 1.6rem;
+    margin-top: 1.8rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,13 +113,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 4rem 6vw 1rem;
+    padding: 3rem 6vw;
     max-width: 640px;
     margin: 0 auto;
     gap: 1.5rem;
   }
   .badge-img {
-    max-height: 120px;
+    max-height: 110px;
     width: auto;
   }
   .quote-section {
@@ -126,8 +143,8 @@
 
   /* ---------- Media section ---------- */
   .media {
-    padding: 1rem 6vw 5rem;
-    max-width: 1000px;
+    width: 100%;
+    padding: 2rem 6vw;
     margin: 0 auto;
   }
   .media-frame {
@@ -135,6 +152,8 @@
     border-radius: 4px;
     overflow: hidden;
     background: #fafafa;
+    max-width: 800px;
+    margin: 0 auto;
   }
   .media-frame img,
   .media-frame video {
@@ -142,7 +161,7 @@
     display: block;
   }
   .media-caption {
-    margin-top: 0.9rem;
+    margin-top: 1.2rem;
     font-size: 0.92rem;
     letter-spacing: 0.01em;
     text-transform: none;
@@ -158,19 +177,19 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    margin-top: 2.5rem;
   }
 
   /* ---------- Notify section ---------- */
   .notify {
-    min-height: 60vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 7vh 6vw;
+    padding: 5rem 6vw;
     border-top: 1px solid var(--line);
+    margin-top: 2rem;
   }
 
   .notify h2 {
@@ -185,15 +204,16 @@
     font-size: 0.95rem;
     max-width: 36ch;
     line-height: 1.7;
-    margin-bottom: 2.3rem;
+    margin-bottom: 2.5rem;
   }
 
   form {
     display: flex;
     width: 100%;
-    max-width: 420px;
+    max-width: 380px;
     border-bottom: 1px solid var(--ink);
     padding-bottom: 0.5rem;
+    margin: 0 auto;
   }
 
   input[type="email"] {
@@ -205,6 +225,7 @@
     font-size: 0.95rem;
     color: var(--ink);
     padding: 0.4rem 0.2rem;
+    text-align: center;
   }
   input[type="email"]::placeholder { color: var(--ash); }
 
@@ -236,7 +257,7 @@
   }
 
   .platform {
-    margin-top: 2.6rem;
+    margin-top: 3rem;
     font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -244,11 +265,12 @@
   }
 
   .itch-secondary {
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
     font-size: 0.78rem;
     color: var(--grey);
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.4rem;
   }
   .itch-secondary a {
@@ -258,11 +280,13 @@
   }
 
   footer {
+    width: 100%;
     text-align: center;
-    padding: 2.5rem 6vw 3.5rem;
+    padding: 3rem 6vw;
     font-size: 0.7rem;
     color: var(--ash);
     letter-spacing: 0.04em;
+    border-top: 1px solid var(--line);
   }
 </style>
 </head>
@@ -272,5 +296,78 @@
   <section class="hero">
     <img src="hero.png" class="hero-art" alt="THE LONELY ARCHITECT">
     <div class="hero-sub">
-      <p class="tagline">The Lonely Architect is a 2D atmospheric platformer set inside the subconscious of an isolated, overworked architect. What started as a demo that placed in the Top 25 for the 2024 'Safe In Our World' Game Jam is now the debut title from solo developer Odaro Eguavoen (Ekosodi Games).</p>
+      <p class="tagline">The Lonely Architect is a 2D atmospheric platformer set inside the subconscious of an isolated, overworked architect[cite: 3]. What started as a demo that placed in the Top 25 for the 2024 'Safe In Our World' Game Jam is now the debut title from solo developer Odaro Eguavoen (Ekosodi Games)[cite: 4].</p>
       <div class="links-row">
+        <img src="itchio-black.png" class="itch-icon" alt="itch.io symbol">
+        <a class="itch-link" href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">Play now on itch.io [cite: 6]</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="accolade-container">
+    <img src="SAFEOW.jpg" class="badge-img" alt="Safe In Our World 2024 Finalist Badge">
+    <div class="quote-section">
+      <blockquote>"I adore the abstract artwork and surrealist interpretation of the mind - visually this game really stands out! The puzzles were engaging and is certainly one I'd like to see developed further." [cite: 16, 17]</blockquote>
+      <cite>— SAFE IN OUR WORLD [cite: 18]</cite>
+    </div>
+  </section>
+
+  <section class="media">
+    <div class="media-grid">
+      <div>
+        <div class="media-frame">
+          <img src="teaser.gif" alt="The Lonely Architect Gameplay Preview">
+        </div>
+        <p class="media-caption">Navigate eerie, minimalist landscapes shaped by isolation[cite: 20].</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="notify">
+    <h2>Launching soon on Steam [cite: 21]</h2>
+    <p>Get an email when The Lonely Architect launches on Steam. [cite: 22]</p>
+
+    <form id="signup-form" action="https://formspree.io/f/mjgdngrd" method="POST">
+      <input type="email" name="email" placeholder="your email" required aria-label="Email address">
+      <button type="submit">NOTIFY ME [cite: 24]</button>
+    </form>
+    <div class="status" id="form-status" role="status"></div>
+
+    <div class="platform">WISHLIST SOON ON STEAM [cite: 25]</div>
+    <div class="itch-secondary">
+      <img src="itchio-black.png" class="itch-icon" alt="" style="height:14px;"> 
+      ALREADY PLAYABLE ON <a href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">ITCH.IO [cite: 25]</a>
+    </div>
+  </section>
+
+  <footer>THE LONELY ARCHITECT-2026 [cite: 26]</footer>
+</main>
+
+<script>
+  const form = document.getElementById('signup-form');
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    status.textContent = 'Sending…';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        status.textContent = "You're in. We'll knock when it's ready.";
+        form.reset();
+      } else {
+        status.textContent = 'Something went wrong — try again in a moment.';
+      }
+    } catch (err) {
+      status.textContent = 'Could not reach the server. Check your connection.';
+    }
+  });
+</script>
+
+</body>
+</html>
