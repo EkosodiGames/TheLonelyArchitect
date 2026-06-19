@@ -12,8 +12,6 @@
     --ash:    #9a9a9a;
     --orange: #ef8b4d;
     --line:   #e4e4e4;
-    /* Responsive base typography tailored to look optimal at 1440px target scale */
-    font-size: clamp(16px, 1.1vw, 20px);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,190 +23,177 @@
     font-family: 'Arial Narrow', Arial, sans-serif;
     font-stretch: condensed;
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.6;
   }
 
-  img, video { display: block; max-width: 100%; height: auto; margin: 0 auto; }
-
-  /* ---------- Strict 1440px Threshold Max Constraints ---------- */
-  /* This prevents left/right shifting and locks layout center with white margins on 4K */
-  .page-wrapper {
-    max-width: 1440px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 0 4vw;
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   }
 
-  .text-width-bounded {
-    max-width: 720px;
-    margin: 0 auto;
-    width: 100%;
-  }
+  img, video { display: block; max-width: 100%; }
 
-  /* ---------- Progressive Reveal Animation Structure ---------- */
-  .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: opacity, transform;
-  }
-
-  .reveal-on-scroll.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ---------- Hero Section ---------- */
+  /* ---------- Hero ---------- */
   .hero {
     width: 100%;
     background: var(--bg);
-    text-align: center;
   }
-  
-  .hero-img-wrap {
+  .hero img.hero-art {
     width: 100%;
-    margin-bottom: 2.5rem;
-  }
-  .hero img {
-    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .hero-sub {
     text-align: center;
-    padding: 0 0 4rem;
+    padding: 2.2rem 6vw 3.5rem;
   }
 
-  /* COPY UPDATE: Black & Bold */
   .tagline {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--ink);
+    max-width: 46ch;
+    margin: 0 auto;
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    font-weight: 400;
     letter-spacing: 0.01em;
-    line-height: 1.6;
+    line-height: 1.7;
+    color: var(--grey);
+    opacity: 0;
+    animation: rise 1s ease forwards 0.2s;
   }
 
-  /* Itch Block Module Placement */
-  .itch-btn-block {
-    margin-top: 2.5rem;
-    display: inline-flex;
-    flex-direction: column;
+  .links-row {
+    margin-top: 1.6rem;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    text-decoration: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: rise 1s ease forwards 0.4s;
   }
-  .itch-btn-block:hover {
-    opacity: 0.7;
-    transform: translateY(-2px);
+
+  .itch-icon {
+    height: 18px;
+    width: auto;
   }
-  .itch-logo {
-    width: 80px;
-    height: auto;
-    margin-bottom: 0.7rem;
-  }
-  .itch-link-text {
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+
+  .itch-link {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
     color: var(--orange);
+    text-decoration: none;
     border-bottom: 1px solid var(--orange);
     padding-bottom: 2px;
-    text-transform: lowercase;
+    transition: opacity 0.2s ease;
+  }
+  .itch-link:hover { opacity: 0.6; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ---------- Quote Section ---------- */
+  /* ---------- Quote & Badge ---------- */
+  .accolade-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 6vw 1rem;
+    max-width: 640px;
+    margin: 0 auto;
+    gap: 1.5rem;
+  }
+  .badge-img {
+    max-height: 120px;
+    width: auto;
+  }
   .quote-section {
     text-align: center;
-    padding: 4rem 0 2rem;
   }
-  
-  /* SAFEOW.jpg positioning directly above review copy text */
-  .siow-badge {
-    max-width: 180px;
-    margin: 0 auto 1.8rem;
-  }
-  .siow-badge img {
-    width: 100%;
-  }
-
-  /* COPY UPDATE: Smaller, less prominent, Grey and NOT bold */
   .quote-section blockquote {
-    font-size: 1.25rem;
-    font-weight: 400;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
     font-style: italic;
     line-height: 1.6;
-    color: var(--grey);
+    color: var(--ink);
   }
   .quote-section cite {
     display: block;
     margin-top: 1rem;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-style: normal;
-    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--orange);
   }
 
-  /* ---------- Media / Gameplay Display ---------- */
+  /* ---------- Media section ---------- */
   .media {
-    padding: 2rem 0 5rem;
-    text-align: center;
+    padding: 1rem 6vw 5rem;
+    max-width: 1000px;
+    margin: 0 auto;
   }
   .media-frame {
     border: 1px solid var(--line);
     border-radius: 4px;
     overflow: hidden;
     background: #fafafa;
-    max-width: 1000px;
-    margin: 0 auto;
   }
-  .media-frame img {
+  .media-frame img,
+  .media-frame video {
     width: 100%;
     display: block;
   }
   .media-caption {
-    margin-top: 0.8rem;
-    font-size: 1.05rem;
+    margin-top: 0.9rem;
+    font-size: 0.92rem;
     letter-spacing: 0.01em;
+    text-transform: none;
     color: var(--grey);
+    text-align: center;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
     line-height: 1.6;
   }
 
-  /* ---------- Notify Input Module ---------- */
+  .media-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  /* ---------- Notify section ---------- */
   .notify {
-    min-height: 45vh;
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 8vh 0;
+    padding: 7vh 6vw;
     border-top: 1px solid var(--line);
   }
 
   .notify h2 {
     font-weight: 700;
-    font-size: 2.1rem;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
     letter-spacing: 0.01em;
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
   }
 
   .notify p {
     color: var(--grey);
-    font-size: 1.15rem;
-    max-width: 40ch;
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+    max-width: 36ch;
+    line-height: 1.7;
+    margin-bottom: 2.3rem;
   }
 
   form {
     display: flex;
     width: 100%;
-    max-width: 440px;
+    max-width: 420px;
     border-bottom: 1px solid var(--ink);
-    padding-bottom: 0.6rem;
-    margin: 0 auto;
+    padding-bottom: 0.5rem;
   }
 
   input[type="email"] {
@@ -217,10 +202,9 @@
     border: none;
     outline: none;
     font-family: 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: var(--ink);
     padding: 0.4rem 0.2rem;
-    text-align: center; /* Keeps formatting perfectly uniform */
   }
   input[type="email"]::placeholder { color: var(--ash); }
 
@@ -228,13 +212,12 @@
     background: var(--orange);
     border: none;
     font-family: 'Arial Narrow', Arial, sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
+    font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #fff;
     cursor: pointer;
-    padding: 0.6rem 1.3rem;
+    padding: 0.5rem 1.1rem;
     border-radius: 3px;
     margin-left: 0.6rem;
     transition: opacity 0.2s ease;
@@ -246,32 +229,38 @@
   }
 
   .status {
-    margin-top: 1.5rem;
-    font-size: 0.95rem;
+    margin-top: 1.2rem;
+    font-size: 0.8rem;
     color: var(--grey);
     min-height: 1.2em;
   }
 
-  .footer-links {
-    margin-top: 5rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
+  .platform {
+    margin-top: 2.6rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ash);
-    line-height: 1.8;
   }
-  .footer-links a {
+
+  .itch-secondary {
+    margin-top: 0.6rem;
+    font-size: 0.78rem;
     color: var(--grey);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ash);
-    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
-  .footer-links a:hover { color: var(--orange); }
+  .itch-secondary a {
+    color: var(--orange);
+    text-decoration: none;
+    border-bottom: 1px solid var(--orange);
+  }
 
   footer {
     text-align: center;
-    padding: 3rem 0;
-    font-size: 0.75rem;
+    padding: 2.5rem 6vw 3.5rem;
+    font-size: 0.7rem;
     color: var(--ash);
     letter-spacing: 0.04em;
   }
@@ -279,109 +268,9 @@
 </head>
 <body>
 
-<div class="page-wrapper">
-
-  <main>
-    <section class="hero">
-      <div class="hero-img-wrap">
-        <img src="hero.png" alt="The Lonely Architect — key art">
-      </div>
-      <div class="text-width-bounded hero-sub reveal-on-scroll">
-        <p class="tagline">The Lonely Architect is a 2D atmospheric platformer set inside the subconscious of an isolated, overworked architect. What started as a demo that placed in the Top 25 for the 2024 ‘Safe In Our World’ Game Jam is now the debut title from solo developer Odaro Eguavoen (Ekosodi Games).</p>
-        
-        <a class="itch-btn-block" href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">
-          <img class="itch-logo" src="itchio-black.png" alt="itch.io Logo">
-          <span class="itch-link-text">play now on itch.io</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="quote-section reveal-on-scroll">
-      <div class="text-width-bounded">
-        <div class="siow-badge">
-          <img src="SAFEOW.jpg" alt="Safe In Our World Accomplishment Seal">
-        </div>
-        <blockquote>“I adore the abstract artwork and surrealist interpretation of the mind – visually this game really stands out! The puzzles were engaging and is certainly one I’d like to see developed further.”</blockquote>
-        <cite>— SAFE IN OUR WORLD</cite>
-      </div>
-    </section>
-
-    <section class="media reveal-on-scroll">
-      <div class="media-frame">
-        <img src="teaser.gif" alt="Gameplay preview of The Lonely Architect">
-      </div>
-      <div class="text-width-bounded">
-        <p class="media-caption">Navigate eerie, minimalist landscapes shaped by isolation.</p>
-      </div>
-    </section>
-
-    <section class="notify reveal-on-scroll">
-      <div class="text-width-bounded">
-        <h2>Be there when the doors open on Steam</h2>
-        <p>Get an email when The Lonely Architect launches on Steam.</p>
-
-        <form id="signup-form" action="https://formspree.io/f/mjgdngrd" method="POST">
-          <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
-          <button type="submit">NOTIFY ME</button>
-        </form>
-        
-        <div class="status" id="form-status" role="status"></div>
-
-        <div class="footer-links">
-          WISHLIST SOON ON STEAM &bull; ALREADY PLAYABLE ON <a href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">ITCH.IO</a>
-        </div>
-      </div>
-    </section>
-
-    <footer>THE LONELY ARCHITECT — © 2026</footer>
-  </main>
-
-</div> <script>
-  /* --- Clean Intersection Observer Engine for Progressive Scroll Reveals --- */
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -80px 0px', // Animates slightly before reaching center view
-    threshold: 0.1
-  };
-
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target); 
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.reveal-on-scroll').forEach(element => {
-    revealObserver.observe(element);
-  });
-
-  /* --- Submission Link Processing --- */
-  const form = document.getElementById('signup-form');
-  const status = document.getElementById('form-status');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    status.textContent = 'Sending…';
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        status.textContent = "You’re in. We’ll let you know the moment it’s ready.";
-        form.reset();
-      } else {
-        status.textContent = 'Something went wrong — try again in a moment.';
-      }
-    } catch (err) {
-      status.textContent = 'Could not reach the server. Check your connection.';
-    }
-  });
-</script>
-
-</body>
-</html>
+<main>
+  <section class="hero">
+    <img src="hero.png" class="hero-art" alt="THE LONELY ARCHITECT">
+    <div class="hero-sub">
+      <p class="tagline">The Lonely Architect is a 2D atmospheric platformer set inside the subconscious of an isolated, overworked architect. What started as a demo that placed in the Top 25 for the 2024 'Safe In Our World' Game Jam is now the debut title from solo developer Odaro Eguavoen (Ekosodi Games).</p>
+      <div class="links-row">
