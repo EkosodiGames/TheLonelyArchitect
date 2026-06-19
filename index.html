@@ -12,6 +12,8 @@
     --ash:    #9a9a9a;
     --orange: #ef8b4d;
     --line:   #e4e4e4;
+    /* Ultra-responsive fluid base scaling for 4K / High-Res displays */
+    font-size: clamp(14px, 1.2vw + 4px, 28px);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,23 +26,33 @@
     font-stretch: condensed;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+    line-height: 1.6;
   }
 
   img, video { display: block; max-width: 100%; height: auto; }
 
-  /* ---------- Structural Desktop Containers ---------- */
+  /* ---------- Progressive Reveal Scroll Styles ---------- */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1), transform 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- Structural Constraints ---------- */
   .layout-wrapper {
-    max-width: 1080px;
+    max-width: 1200px;
     margin: 0 auto;
     width: 100%;
   }
 
   .text-bounds {
-    max-width: 620px;
+    max-width: 720px;
     margin: 0 auto;
     width: 100%;
   }
@@ -60,74 +72,83 @@
 
   .hero-sub {
     text-align: center;
-    padding: 2.2rem 6vw 3.5rem;
+    padding: 3rem 6vw 4rem;
   }
 
-  /* Fixed Typography: Increased baseline desktop size constraints */
+  /* Fixed Weight: Copy is now bolder and completely readable on 4K */
   .tagline {
-    font-size: 1.1rem;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    line-height: 1.65;
-    color: var(--grey);
-    opacity: 0;
-    animation: rise 1s ease forwards 0.2s;
-  }
-
-  /* Fixed Spacing 1: Tightened link gap by 50% */
-  .links-row {
-    margin-top: 0.7rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.6rem;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: rise 1s ease forwards 0.4s;
-  }
-
-  .itch-link {
-    font-size: 0.95rem;
-    letter-spacing: 0.05em;
-    color: var(--orange);
-    text-decoration: none;
-    border-bottom: 1px solid var(--orange);
-    padding-bottom: 2px;
-    transition: opacity 0.2s ease;
-  }
-  .itch-link:hover { opacity: 0.6; }
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ---------- Quote ---------- */
-  /* Fixed Spacing 2: Added top breathing space, zeroed out base bottom padding */
-  .quote-section {
-    text-align: center;
-    padding: 6rem 6vw 0;
-  }
-  .quote-section blockquote {
     font-size: 1.25rem;
-    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     line-height: 1.6;
     color: var(--ink);
   }
-  /* Fixed Spacing 2: Tightened gap under attribution */
+
+  /* Itch Link Block with Image above Text */
+  .itch-btn-block {
+    margin-top: 2rem;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .itch-btn-block:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
+  }
+  .itch-logo {
+    width: 70px;
+    height: auto;
+    margin-bottom: 0.6rem;
+  }
+  .itch-link-text {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--orange);
+    border-bottom: 1px solid var(--orange);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- Quote Section ---------- */
+  .quote-section {
+    text-align: center;
+    padding: 6rem 6vw 2rem;
+  }
+  
+  /* Safe In Our World Image placement */
+  .siow-badge {
+    max-width: 160px;
+    margin: 0 auto 1.5rem;
+  }
+  .siow-badge img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Fixed Weight: Review quote is now thinner and elegantly styled */
+  .quote-section blockquote {
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--grey);
+  }
   .quote-section cite {
     display: block;
-    margin-top: 0.8rem;
-    font-size: 0.85rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
     font-style: normal;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--orange);
   }
 
-  /* ---------- Media section ---------- */
-  /* Fixed Spacing 2: Reduced top space to group cleanly below the quote hook */
+  /* ---------- Media Section ---------- */
   .media {
-    padding: 1.5rem 6vw 5rem;
+    padding: 2rem 6vw 6rem;
   }
   .media-frame {
     border: 1px solid var(--line);
@@ -135,17 +156,14 @@
     overflow: hidden;
     background: #fafafa;
   }
-  .media-frame img,
-  .media-frame video {
+  .media-frame img {
     width: 100%;
     display: block;
   }
-  /* Fixed Spacing 3: Brought caption immediately underneath screenshot */
   .media-caption {
-    margin-top: 0.4rem;
-    font-size: 1rem;
+    margin-top: 0.6rem;
+    font-size: 1.1rem;
     letter-spacing: 0.01em;
-    text-transform: none;
     color: var(--grey);
     text-align: center;
     line-height: 1.6;
@@ -154,44 +172,43 @@
   .media-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 3rem;
     margin-top: 1rem;
   }
 
-  /* ---------- Notify section ---------- */
-  /* Fixed Spacing 4: Distinct layout breaking container via padding adjustments */
+  /* ---------- Notify Section ---------- */
   .notify {
-    min-height: 55vh;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 8vh 6vw;
+    padding: 10vh 6vw;
     border-top: 1px solid var(--line);
   }
 
   .notify h2 {
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     letter-spacing: 0.01em;
-    margin-bottom: 0.9rem;
+    margin-bottom: 1rem;
   }
 
   .notify p {
     color: var(--grey);
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     max-width: 40ch;
     line-height: 1.6;
-    margin-bottom: 2.3rem;
+    margin-bottom: 2.5rem;
   }
 
   form {
     display: flex;
     width: 100%;
-    max-width: 420px;
+    max-width: 460px;
     border-bottom: 1px solid var(--ink);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.6rem;
     margin: 0 auto;
   }
 
@@ -201,7 +218,7 @@
     border: none;
     outline: none;
     font-family: 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: var(--ink);
     padding: 0.4rem 0.2rem;
   }
@@ -211,12 +228,13 @@
     background: var(--orange);
     border: none;
     font-family: 'Arial Narrow', Arial, sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #fff;
     cursor: pointer;
-    padding: 0.5rem 1.1rem;
+    padding: 0.6rem 1.4rem;
     border-radius: 3px;
     margin-left: 0.6rem;
     transition: opacity 0.2s ease;
@@ -228,16 +246,15 @@
   }
 
   .status {
-    margin-top: 1.2rem;
-    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    font-size: 1rem;
     color: var(--grey);
     min-height: 1.2em;
   }
 
-  /* Fixed Spacing 4: Amplified padding layout gaps separating primary and footer targets */
   .footer-links {
-    margin-top: 4.5rem;
-    font-size: 0.78rem;
+    margin-top: 6rem;
+    font-size: 0.85rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--ash);
@@ -249,28 +266,23 @@
     border-bottom: 1px solid var(--ash);
     transition: color 0.2s ease;
   }
-  .footer-links a:hover {
-    color: var(--orange);
-  }
+  .footer-links a:hover { color: var(--orange); }
 
   footer {
     text-align: center;
-    padding: 2.5rem 6vw 3.5rem;
-    font-size: 0.75rem;
+    padding: 3rem 6vw;
+    font-size: 0.8rem;
     color: var(--ash);
     letter-spacing: 0.04em;
   }
 
-  /* ---------- Media Query Enhancements for Laptop & Desktop Screens ---------- */
-  @media screen and (min-width: 769px) {
-    .tagline { font-size: 1.35rem; }
-    .itch-link { font-size: 1.1rem; }
-    .quote-section blockquote { font-size: 1.65rem; max-width: 720px; margin: 0 auto; }
-    .quote-section cite { font-size: 0.95rem; margin-top: 1.2rem; }
-    .media-caption { font-size: 1.15rem; margin-top: 0.8rem; }
-    .notify h2 { font-size: 2.2rem; }
-    .notify p { font-size: 1.2rem; }
-    .footer-links { font-size: 0.85rem; margin-top: 6rem; }
+  /* Specific Layout scaling adjustments for native 4K workstation displays */
+  @media screen and (min-width: 2500px) {
+    :root { font-size: 26px; }
+    .layout-wrapper { max-width: 1600px; }
+    .text-bounds { max-width: 960px; }
+    .itch-logo { width: 90px; }
+    .siow-badge { max-width: 220px; }
   }
 </style>
 </head>
@@ -281,22 +293,27 @@
     <div class="layout-wrapper hero-img-wrap">
       <img src="hero.png" alt="The Lonely Architect — key art">
     </div>
-    <div class="text-bounds hero-sub">
+    <div class="text-bounds hero-sub reveal-on-scroll">
       <p class="tagline">The Lonely Architect is a 2D atmospheric platformer set inside the subconscious of an isolated, overworked architect. What started as a demo that placed in the Top 25 for the 2024 ‘Safe In Our World’ Game Jam is now the debut title from solo developer Odaro Eguavoen (Ekosodi Games).</p>
-      <div class="links-row">
-        <a class="itch-link" href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">[ Play now on itch.io ]</a>
-      </div>
+      
+      <a class="itch-btn-block" href="https://thearchitecht.itch.io/the-lonely-architect" target="_blank" rel="noopener">
+        <img class="itch-logo" src="itchio-black.png" alt="itch.io Logo">
+        <span class="itch-link-text">play now on itch.io</span>
+      </a>
     </div>
   </section>
 
-  <section class="quote-section">
+  <section class="quote-section reveal-on-scroll">
     <div class="text-bounds">
+      <div class="siow-badge">
+        <img src="SAFEOW.jpg" alt="Safe In Our World Accomplishment Logo">
+      </div>
       <blockquote>“I adore the abstract artwork and surrealist interpretation of the mind – visually this game really stands out! The puzzles were engaging and is certainly one I’d like to see developed further.”</blockquote>
       <cite>— SAFE IN OUR WORLD</cite>
     </div>
   </section>
 
-  <section class="media">
+  <section class="media reveal-on-scroll">
     <div class="layout-wrapper">
       <div class="media-grid">
         <div>
@@ -311,7 +328,7 @@
     </div>
   </section>
 
-  <section class="notify">
+  <section class="notify reveal-on-scroll">
     <div class="text-bounds">
       <h2>Be there when the doors open on Steam</h2>
       <p>Get an email when The Lonely Architect launches on Steam.</p>
@@ -333,6 +350,27 @@
 </main>
 
 <script>
+  /* --- Intersection Observer System for Progressive Reveal --- */
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.12
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target); // Keeps animation from resetting once triggered
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal-on-scroll').forEach(element => {
+    revealObserver.observe(element);
+  });
+
+  /* --- Formspree Subscription Code Handling --- */
   const form = document.getElementById('signup-form');
   const status = document.getElementById('form-status');
 
